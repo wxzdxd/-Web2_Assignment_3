@@ -1,0 +1,36 @@
+<!-- Welcome-->
+<section class="welcome">
+  <h1>Welcome to Our Non-Profit Organization</h1>
+  <p>We strive to make the world a better place by helping communities in need. Learn more about our stories and
+    missions below.</p>
+</section>
+
+<!-- Inspirational Stories -->
+<section class="stories">
+  <h2>Inspirational Stories</h2>
+  <p>Meet the people whose lives have been transformed by your generous donations.</p>
+</section>
+
+<!-- Contact Information -->
+<section class="contact">
+  <h2>Contact Us</h2>
+  <p>Email: xxxxxx@gmail.com | Phone: +61 123 456 xxx</p>
+  <p>Address: xxx Charity Lane, Byron Bay, NSW, Australia</p>
+</section>
+
+<!-- Active Fundraisers Section -->
+<section id="fundraisers">
+  <h2>Active Fundraisers</h2>
+  <div id="fundraiser-list">
+    <!-- ng for fundraisers -->
+    <div *ngFor="let fundraiser of fundraisers; let i = index" class="fundraiser-card">
+      <img [src]="'../../assets/img/home' + (i % 3 + 1) + '.png'" alt="Fundraiser Image"> 
+      <h3>{{ fundraiser.CAPTION }}</h3>
+      <p><strong>Organizer:</strong> {{ fundraiser.ORGANIZER }}</p>
+      <p><strong>Target Funding:</strong> ${{ fundraiser.TARGET_FUNDING }}</p>
+      <p><strong>Current Funding:</strong> ${{ fundraiser.CURRENT_FUNDING }}</p>
+      <p><strong>City:</strong> {{ fundraiser.CITY }}</p>
+      <p><strong>Category:</strong> {{ fundraiser.NAME }}</p>
+    </div>
+  </div>
+</section>

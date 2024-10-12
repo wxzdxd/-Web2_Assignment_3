@@ -1,0 +1,38 @@
+<h1>Search Fundraisers</h1>
+
+<div class="form-container">
+  <form (ngSubmit)="search()">
+    <label for="organizer">Organizer:</label>
+    <input type="text" id="organizer" name="organizer" [(ngModel)]="organizer" placeholder="Enter organizer name">
+
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city" [(ngModel)]="city" placeholder="Enter city name">
+
+    <label for="category">Category:</label>
+    <select id="category" name="category" [(ngModel)]="selectedCategory">
+      <option value="">Select category</option>
+      <option *ngFor="let category of categories" [value]="category.CATEGORY_ID">{{ category.NAME }}</option>
+    </select>
+
+    <button type="submit">Search</button>
+    <button type="button" class="clear-btn" (click)="clearForm()">Clear</button> <!-- Call clearForm()-->
+  </form>
+
+  <p id="error-message" class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+</div>
+
+<section id="fundraisers">
+  <h2>Fundraiser Results</h2>
+  <div id="fundraiser-list">
+    <div *ngFor="let fundraiser of fundraisers" class="fundraiser-card">
+      <img [src]="'../../assets/img/home' + (fundraisers.indexOf(fundraiser) % 3 + 1) + '.png'" alt="Fundraiser Image">
+      <h3>{{ fundraiser.CAPTION }}</h3>
+      <p><strong>Organizer:</strong> {{ fundraiser.ORGANIZER }}</p>
+      <p><strong>Target Funding:</strong> ${{ fundraiser.TARGET_FUNDING }}</p>
+      <p><strong>Current Funding:</strong> ${{ fundraiser.CURRENT_FUNDING }}</p>
+      <p><strong>City:</strong> {{ fundraiser.CITY }}</p>
+      <p><strong>Category:</strong> {{ fundraiser.NAME }}</p>
+      <a (click)="goFundraiser(fundraiser.FUNDRAISER_ID)">View Details</a>
+    </div>
+  </div>
+</section>
