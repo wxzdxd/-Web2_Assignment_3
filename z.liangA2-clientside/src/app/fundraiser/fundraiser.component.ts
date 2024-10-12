@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class FundraiserComponent implements OnInit {
 
   fundraiser: any; // fundraiser details
-Math: any;
+  isshow: boolean = false; 
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
@@ -28,12 +28,21 @@ Math: any;
     this.http.get(`http://localhost:3000/api/fundraiser/${fundraiserId}`)
       .subscribe({
         next: (data: any) => {
-          this.fundraiser = data; // fundraiser details 
+          this.fundraiser = data.fundraiser; // fundraiser details 
         },
         error: (error: any) => {
           console.error(error);
         }
       });
+  }
+  showModal() {
+    this.isshow = true; //  show the modal
+    console.log(this.isshow)
+  }
+
+  // Function to close the donation modal
+  closeModal() {
+    this.isshow = false; // hide the modal
   }
 
 }

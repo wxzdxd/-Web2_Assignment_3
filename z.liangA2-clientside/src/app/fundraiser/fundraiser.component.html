@@ -12,12 +12,12 @@
 </div>
 
 <!-- Donation button -->
-<button id="donate-button" class="donate-button">Donate</button>
+<button id="donate-button" class="donate-button" (click)="showModal()">Donate</button>
 
 <!-- Alert Modal -->
-<div id="donation-modal" class="modal">
+<div id="donation-modal" class="modal" *ngIf="isshow">
     <div class="modal-content">
-        <span class="close-button" id="close-button">&times;</span>
-        <p>This feature is under construction</p>
+        <span class="close-button" id="close-button" (click)="closeModal()">&times;</span>
+        <!-- <p>This feature is under construction</p> -->
     </div>
 </div>
