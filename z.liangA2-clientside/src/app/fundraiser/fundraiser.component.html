@@ -13,11 +13,23 @@
 
 <!-- Donation button -->
 <button id="donate-button" class="donate-button" (click)="showModal()">Donate</button>
-
-<!-- Alert Modal -->
-<div id="donation-modal" class="modal" *ngIf="isshow">
-    <div class="modal-content">
-        <span class="close-button" id="close-button" (click)="closeModal()">&times;</span>
-        <!-- <p>This feature is under construction</p> -->
-    </div>
-</div>
+<br><br>
+<!-- Donations list -->
+<h1>Donations</h1>
+<table *ngIf="donations && donations.length > 0" class="donation-table">
+  <thead>
+    <tr>
+      <th>Donor</th>
+      <th>Amount</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let donation of donations">
+      <td>{{ donation.GIVER }}</td>
+      <td>${{ donation.AMOUNT }}</td>
+      <td>{{ donation.DATE | date }}</td>
+    </tr>
+  </tbody>
+</table>
+<p *ngIf="!donations || donations.length === 0">No donations yet.</p>

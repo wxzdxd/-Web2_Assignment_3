@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class FundraiserComponent implements OnInit {
 
   fundraiser: any; // fundraiser details
+  donations: any[] = []; // donation list
   isshow: boolean = false; 
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
@@ -29,6 +30,7 @@ export class FundraiserComponent implements OnInit {
       .subscribe({
         next: (data: any) => {
           this.fundraiser = data.fundraiser; // fundraiser details 
+          this.donations = data.donations; // donation list
         },
         error: (error: any) => {
           console.error(error);
