@@ -25,7 +25,7 @@ export class SearchComponent implements OnInit {
   }
   // Function to load categories from the API
   loadCategories() {
-    this.http.get<any[]>('http://localhost:3000/api/categories')
+    this.http.get<any[]>('https://24274847.it.scu.edu.au/DataServ/categories')
       .subscribe({
         next: (categories: any[]) => this.categories = categories,
         error: (error: any) => console.error(error)
@@ -54,7 +54,7 @@ export class SearchComponent implements OnInit {
     if (this.city) query += `city=${this.city}&`;
     if (this.selectedCategory) query += `category=${this.selectedCategory}`;
 
-    this.http.get<any[]>(`http://localhost:3000/api/search${query}`)
+    this.http.get<any[]>(`https://24274847.it.scu.edu.au/DataServ/search${query}`)
       .subscribe({
         next: (data: any[]) => {
           if (data.length > 0) {

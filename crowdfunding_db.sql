@@ -1,18 +1,4 @@
-/*
- Navicat Premium Data Transfer
 
- Source Server         : 本地mysql
- Source Server Type    : MySQL
- Source Server Version : 80025
- Source Host           : localhost:3306
- Source Schema         : crowdfunding_db
-
- Target Server Type    : MySQL
- Target Server Version : 80025
- File Encoding         : 65001
-
- Date: 13/10/2024 01:15:37
-*/
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -75,6 +61,7 @@ INSERT INTO `donation` VALUES (38, '2024-10-12 00:00:00', 16000.00, 'Mason Clark
 INSERT INTO `donation` VALUES (39, '2024-10-12 00:00:00', 28000.00, 'Sophia Lewis', 8);
 INSERT INTO `donation` VALUES (40, '2024-10-12 00:00:00', 35000.00, 'Ethan Lee', 9);
 INSERT INTO `donation` VALUES (41, '2024-10-12 17:30:00', 1500.00, 'John Yhh', 10);
+INSERT INTO `donation` VALUES (42, '2024-01-10 07:30:00', 1500.00, 'John Doe', 1);
 
 -- ----------------------------
 -- Table structure for fundraiser
@@ -97,7 +84,7 @@ CREATE TABLE `fundraiser`  (
 -- ----------------------------
 -- Records of fundraiser
 -- ----------------------------
-INSERT INTO `fundraiser` VALUES (1, 'Alice Johnson', 'dddd', 10000.00, 20000.00, 'Sydney', 1, 1);
+INSERT INTO `fundraiser` VALUES (1, 'Alice Johnson', 'Youth Sponsorship', 10000.00, 20000.00, 'Sydney', 1, 1);
 INSERT INTO `fundraiser` VALUES (2, 'Jane Smith', 'Cancer Treatment for Children', 50000.00, 20000.00, 'Melbourne', 1, 2);
 INSERT INTO `fundraiser` VALUES (3, 'Green Earth Foundation', 'Planting Trees in Urban Areas', 15000.00, 8000.00, 'Brisbane', 1, 3);
 INSERT INTO `fundraiser` VALUES (4, 'Animal Lovers', 'Save Endangered Koalas', 30000.00, 12000.00, 'Adelaide', 1, 4);
@@ -112,6 +99,5 @@ INSERT INTO `fundraiser` VALUES (12, 'Healthy Life Org', 'Provide Free Health Ch
 INSERT INTO `fundraiser` VALUES (13, 'Eco Warriors', 'Reduce Plastic Waste in Sydney Beaches', 18000.00, 8000.00, 'Sydney', 1, 3);
 INSERT INTO `fundraiser` VALUES (14, 'Koala Guardians', 'Plant Eucalyptus Trees for Koalas', 22000.00, 9000.00, 'Brisbane', 1, 4);
 INSERT INTO `fundraiser` VALUES (15, 'Emergency Relief Team', 'Assist Bushfire Victims in Victoria', 45000.00, 20000.00, 'Melbourne', 1, 5);
-INSERT INTO `fundraiser` VALUES (16, 'Alice Johnson', 'dddd', 10000.00, 20000.00, 'Sydney', 0, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

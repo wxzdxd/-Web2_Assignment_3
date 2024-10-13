@@ -29,7 +29,7 @@ export class FundraiserComponent implements OnInit {
     }
 
     // Fetch fundraiser details using the ID
-    this.http.get(`http://localhost:3000/api/fundraiser/${fundraiserId}`)
+    this.http.get(`https://24274847.it.scu.edu.au/DataServ/fundraiser/${fundraiserId}`)
       .subscribe({
         next: (data: any) => {
           this.fundraiser = data.fundraiser; // fundraiser details 

@@ -30,7 +30,7 @@ export class DonationComponent implements OnInit {
 
   // Fetch fundraiser details using the ID
   loadFundraiserDetails() {
-    this.http.get(`http://localhost:3000/api/fundraiser/${this.fundraiserId}`).subscribe((data: any) => {
+    this.http.get(`https://24274847.it.scu.edu.au/DataServ/fundraiser/${this.fundraiserId}`).subscribe((data: any) => {
       this.fundraiser = data.fundraiser;
     });
   }
@@ -51,7 +51,7 @@ export class DonationComponent implements OnInit {
     }
 
      // If the donation is valid, submit the donation
-    this.http.post(`http://localhost:3000/api/donation`, {
+    this.http.post(`https://24274847.it.scu.edu.au/DataServ/donation`, {
       date: this.formatDate(new Date()),
       amount: this.donation.amount,
       giver: this.donation.giver,

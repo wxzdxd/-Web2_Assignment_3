@@ -29,7 +29,7 @@ export class AppComponent {
   // Load all fundraisers
   loadFundraisers(): void {
     this.http
-      .get<any[]>('http://localhost:3000/api/admin/fundraisers')
+      .get<any[]>('https://24274847.it.scu.edu.au/DataServ/admin/fundraisers')
       .subscribe(
         (data) => {
           this.fundraisers = data;
@@ -42,7 +42,7 @@ export class AppComponent {
 
   // Load categorie list
   loadCategories() {
-    this.http.get<any[]>('http://localhost:3000/api/categories').subscribe({
+    this.http.get<any[]>('https://24274847.it.scu.edu.au/DataServ/categories').subscribe({
       next: (categories: any[]) => (this.categories = categories), // Set the categories array
       error: (error: any) => console.error(error),
     });
@@ -103,7 +103,7 @@ export class AppComponent {
       // Edit fundraiser
       this.http
         .put(
-          `http://localhost:3000/api/admin/fundraiser/${this.fundraiser.FUNDRAISER_ID}`,
+          `https://24274847.it.scu.edu.au/DataServ/admin/fundraiser/${this.fundraiser.FUNDRAISER_ID}`,
           this.fundraiser
         )
         .subscribe(
@@ -119,7 +119,7 @@ export class AppComponent {
     } else {
       // Create new fundraiser
       this.http
-        .post('http://localhost:3000/api/admin/fundraiser', this.fundraiser)
+        .post('https://24274847.it.scu.edu.au/DataServ/admin/fundraiser', this.fundraiser)
         .subscribe(
           () => {
             alert('Fundraiser added successfully');
@@ -145,7 +145,7 @@ export class AppComponent {
   deleteFundraiser(fundraiserId: number): void {
     if (confirm('Are you sure you want to delete this fundraiser?')) {
       this.http
-        .delete(`http://localhost:3000/api/admin/fundraiser/${fundraiserId}`)
+        .delete(`https://24274847.it.scu.edu.au/DataServ/admin/fundraiser/${fundraiserId}`)
         .subscribe(
           () => {
             alert('Fundraiser deleted successfully');

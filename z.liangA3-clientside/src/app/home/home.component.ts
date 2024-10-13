@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadData() {
-    this.http.get<any[]>('http://localhost:3000/api/fundraisers') // Node server API URL
+    this.http.get<any[]>('https://24274847.it.scu.edu.au/DataServ/fundraisers') // Node server API URL
       .subscribe({
         next: (data) => this.fundraisers = data,
         error: (error) => console.error('Error loading data:', error)
