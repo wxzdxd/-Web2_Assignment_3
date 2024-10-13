@@ -16,6 +16,7 @@ export class SearchComponent implements OnInit {
   organizer: string = ''; // Organizer name
   city: string = ''; // City name
   selectedCategory: string = ''; // Category
+  status = undefined // active
 
   constructor(private http: HttpClient,private router: Router) {}
 
@@ -32,12 +33,23 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-    if (!this.organizer && !this.city && !this.selectedCategory) {
+    if (!this.organizer && !this.city && !this.selectedCategory && !this.status) {
       alert('Please select at least one search criterion');
       return;
     }
 
+    if (this.organizer.length > 50) {
+      alert('Organizer must not exceed 50 characters');
+      return;
+    }
+
+    if (this.city.length > 50) {
+      alert('City must not exceed 50 characters');
+      return; 
+    }
+
     let query = '?';
+    if (this.status) query += `active=${this.status}&`;
     if (this.organizer) query += `organizer=${this.organizer}&`;
     if (this.city) query += `city=${this.city}&`;
     if (this.selectedCategory) query += `category=${this.selectedCategory}`;
@@ -69,6 +81,7 @@ export class SearchComponent implements OnInit {
     this.organizer = ''; 
     this.city = ''; 
     this.selectedCategory = '';
+    this.status = undefined;
     this.errorMessage = '';
     this.fundraisers = [];
   }

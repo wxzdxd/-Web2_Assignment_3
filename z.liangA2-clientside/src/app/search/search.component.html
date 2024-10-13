@@ -14,6 +14,18 @@
       <option *ngFor="let category of categories" [value]="category.CATEGORY_ID">{{ category.NAME }}</option>
     </select>
 
+    <label for="active">Active Status:</label>
+    <div class="flex">
+      <div class="flex x50">
+        <label for="active">Active</label>
+        <input type="radio" id="active" name="active" [(ngModel)]="status" value="1" required>
+      </div>
+      <div class="flex x50">
+        <label for="inactive">Inactive</label>
+        <input type="radio" id="inactive" name="active" [(ngModel)]="status" value="0" required>
+      </div>
+    </div>
+
     <button type="submit">Search</button>
     <button type="button" class="clear-btn" (click)="clearForm()">Clear</button> <!-- Call clearForm()-->
   </form>
