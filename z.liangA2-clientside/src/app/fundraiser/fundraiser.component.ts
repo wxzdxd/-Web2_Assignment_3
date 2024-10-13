@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-fundraiser',
@@ -11,9 +11,10 @@ export class FundraiserComponent implements OnInit {
 
   fundraiser: any; // fundraiser details
   donations: any[] = []; // donation list
+  fundraiserId = undefined;
   isshow: boolean = false; 
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient,private router: Router) {}
 
   ngOnInit(): void {
     this.loadFundraiserDetails(); //Init load fundraiser details
@@ -21,6 +22,8 @@ export class FundraiserComponent implements OnInit {
 
   loadFundraiserDetails() {
     const fundraiserId = this.route.snapshot.paramMap.get('id'); // Get the ID from the route
+    this.fundraiserId = fundraiserId as any;
+    this
     if (!fundraiserId) {
       return;
     }
@@ -37,14 +40,8 @@ export class FundraiserComponent implements OnInit {
         }
       });
   }
-  showModal() {
-    this.isshow = true; //  show the modal
-    console.log(this.isshow)
-  }
-
-  // Function to close the donation modal
-  closeModal() {
-    this.isshow = false; // hide the modal
+  goDonation(){
+    this.router.navigate(['/donation', { id: this.fundraiserId }]); // Navigate to donation route with ID
   }
 
 }

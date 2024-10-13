@@ -1,0 +1,93 @@
+<div class="fundraiser-container">
+  <h1>Fundraiser Management</h1>
+  
+  <!-- Add fundraiser button -->
+  <div class="add-button-div">
+    <button (click)="openFormModal()" class="add-btn">+ Add Fundraiser</button>
+  </div>
+
+  <!-- Fundraiser list table -->
+  <table class="fundraiser-table">
+    <thead>
+      <tr>
+        <th>Organizer</th>
+        <th>Caption</th>
+        <th>Target Funding</th>
+        <th>Current Funding</th>
+        <th>City</th>
+        <th>Category</th>
+        <th>Active</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fundraiser of fundraisers">
+        <td>{{ fundraiser.ORGANIZER }}</td>
+        <td>{{ fundraiser.CAPTION }}</td>
+        <td>${{ fundraiser.TARGET_FUNDING }}</td>
+        <td>${{ fundraiser.CURRENT_FUNDING }}</td>
+        <td>{{ fundraiser.CITY }}</td>
+        <td>{{ fundraiser.NAME }}</td>
+        <td>{{ fundraiser.ACTIVE == 1 ? 'Active' : 'Inactive' }}</td>
+        <td class="flex">
+          <button (click)="editFundraiser(fundraiser)" class="edit-btn">Edit</button>
+          <button (click)="deleteFundraiser(fundraiser.FUNDRAISER_ID)" class="delete-btn">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal-->
+<div *ngIf="isShow" class="modal">
+  <div class="modal-content">
+    <span class="close-button" (click)="closeModal()">&times;</span>
+    <h2 *ngIf="isEdit">Edit Fundraiser</h2>
+    <h2 *ngIf="!isEdit">Add Fundraiser</h2>
+
+    <!-- Add/Edit Form -->
+    <form (ngSubmit)="saveFundraiser()">
+      <label>Organizer:</label>
+      <input type="text" [(ngModel)]="fundraiser.ORGANIZER" name="organizer" required>
+
+      <label>Caption:</label>
+      <input type="text" [(ngModel)]="fundraiser.CAPTION" name="caption" required>
+
+      <label>Target Funding:</label>
+      <input type="number" [(ngModel)]="fundraiser.TARGET_FUNDING" name="targetFunding" required>
+
+      <label>Current Funding:</label>
+      <input type="number" [(ngModel)]="fundraiser.CURRENT_FUNDING" name="currentFunding" required>
+
+      <label>City:</label>
+      <input type="text" [(ngModel)]="fundraiser.CITY" name="city">
+
+      <label>Category:</label>
+      <select id="category" name="category" [(ngModel)]="fundraiser.CATEGORY_ID">
+        <option value="">Select category</option>
+        <option *ngFor="let category of categories" [value]="category.CATEGORY_ID">{{ category.NAME }}</option>
+      </select>
+
+      <div class="flex">
+        <div class="flex x50">
+          <label for="active">Active</label>
+          <input type="radio" id="active" name="active" [(ngModel)]="fundraiser.ACTIVE" [value]="1" required>
+        </div>
+        <div class="flex x50">
+          <label for="inactive">Inactive</label>
+          <input type="radio" id="inactive" name="active" [(ngModel)]="fundraiser.ACTIVE" [value]="0" required>
+        </div>
+      </div>
+
+      <div class="form-buttons">
+        <button class="submit-button" type="submit">{{ isEdit ? 'Update' : 'Save' }}</button>
+        <button class="cancel-button" type="button" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Footer Section -->
+<footer>
+  <p>&copy; 2024 Non-Profit Organization. All rights reserved.</p>
+</footer>

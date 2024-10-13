@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) }, 
   { path: 'search', loadChildren: () => import('./search/search.module').then(m => m.SearchModule) }, 
   { path: 'fundraiser', loadChildren: () => import('./fundraiser/fundraiser.module').then(m => m.FundraiserModule) }, 
+  { path: 'donation', loadChildren: () => import('./donation/donation.module').then(m => m.DonationModule) },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 

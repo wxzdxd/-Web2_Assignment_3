@@ -101,7 +101,7 @@ app.get('/fundraiser/:id', (req, res) => {
 
         // Search donation list by fundraiserId
         const donationsQuery = `
-        SELECT * FROM donation WHERE FUNDRAISER_ID = ?`;
+        SELECT * FROM donation WHERE FUNDRAISER_ID = ? ORDER BY DATE DESC`;
 
         db.query(donationsQuery, [fundraiserId], (err, donations) => {
             if (err) {
@@ -138,26 +138,41 @@ app.post('/donation', (req, res) => {
     });
 });
 
+// Get all fundraisers with categories --- admin
+app.get('/admin/fundraisers', (req, res) => {
+    const query = `
+        SELECT f.*, c.NAME
+        FROM fundraiser f
+        JOIN category c ON f.CATEGORY_ID = c.CATEGORY_ID ORDER BY f.CATEGORY_ID ASC`;
+
+    db.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).send('Database error');
+        }
+        res.json(results);
+    });
+});
+
 // Insert new fundraiser ---- admin
 app.post('/admin/fundraiser', (req, res) => {
     const {
-        organizer,
-        caption,
-        targetFunding,
-        currentFunding,
-        city,
-        active,
-        categoryId
+        ORGANIZER,
+        CAPTION,
+        TARGET_FUNDING,
+        CURRENT_FUNDING,
+        CITY,
+        ACTIVE,
+        CATEGORY_ID
     } = req.body;
     
     // Insert fundraiser query
     const fundraiserQuery = `
-      INSERT INTO FUNDRAISER (ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID) 
+      INSERT INTO fundraiser (ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID) 
       VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-    db.query(fundraiserQuery, [organizer, caption, targetFunding, currentFunding, city, active, categoryId], (err, result) => {
+    db.query(fundraiserQuery, [ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID], (err, result) => {
         if (err) {
-            return res.status(500).send('Insert error');
+            return res.status(500).send(err);
         }
         res.json({
             fundraiserId: result.insertId
@@ -169,13 +184,13 @@ app.post('/admin/fundraiser', (req, res) => {
 app.put('/admin/fundraiser/:id', (req, res) => {
     const fundraiserId = req.params.id;
     const {
-        organizer,
-        caption,
-        targetFunding,
-        currentFunding,
-        city,
-        active,
-        categoryId
+        ORGANIZER,
+        CAPTION,
+        TARGET_FUNDING,
+        CURRENT_FUNDING,
+        CITY,
+        ACTIVE,
+        CATEGORY_ID
     } = req.body;
 
     // Update fundraiser query
@@ -184,11 +199,11 @@ app.put('/admin/fundraiser/:id', (req, res) => {
       SET ORGANIZER = ?, CAPTION = ?, TARGET_FUNDING = ?, CURRENT_FUNDING = ?, CITY = ?, ACTIVE = ?, CATEGORY_ID = ?
       WHERE FUNDRAISER_ID = ?`;
 
-    db.query(updateQuery, [organizer, caption, targetFunding, currentFunding, city, categoryId, active, fundraiserId], (err, result) => {
+    db.query(updateQuery, [ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID, fundraiserId], (err, result) => {
         if (err) {
             return res.status(500).send('Update error');
         }
-        res.send('Fundraiser updated successfully');
+        res.json({ fundraiserId: result.updateId })
     });
 });
 
@@ -217,7 +232,7 @@ app.delete('/admin/fundraiser/:id', (req, res) => {
             if (err) {
                 return res.status(500).send('Delete error');
             }
-            res.send('Fundraiser deleted successfully');
+            res.json({ fundraiserId: result.deleteId })
         });
     });
 });

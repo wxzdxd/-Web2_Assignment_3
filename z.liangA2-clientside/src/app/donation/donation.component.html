@@ -1,0 +1,22 @@
+<h1>Donate to {{ fundraiser?.CAPTION }}</h1>
+
+<div *ngIf="fundraiser" class="fundraiser-card">
+  <p><strong>Organizer:</strong> {{ fundraiser.ORGANIZER }}</p>
+  <p><strong>Target Funding:</strong> ${{ fundraiser.TARGET_FUNDING }}</p>
+  <p><strong>Current Funding:</strong> ${{ fundraiser.CURRENT_FUNDING }}</p>
+</div>
+
+<form (ngSubmit)="submitDonation()" #donationForm="ngForm">
+  <div>
+    <label for="giver">Your Name:</label>
+    <input type="text" id="giver" name="giver" [(ngModel)]="donation.giver" required>
+  </div>
+  
+  <div>
+    <label for="amount">Donation Amount:</label>
+    <input type="number" id="amount" name="amount" [(ngModel)]="donation.amount" required>
+  </div>
+  
+  <button class="donate-button" type="submit">Submit donation</button>
+</form>
+
